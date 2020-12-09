@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 // The Scene that will load all the assets of the game
-class Preloader extends Phaser.Scene {
+class Menu extends Phaser.Scene {
  
   constructor() {
-    super({key: 'Preload', active:false});
+    super({key: 'Menu', active:false});
   }
 
  init(){
@@ -20,11 +20,11 @@ class Preloader extends Phaser.Scene {
  
   create() {
     
-  this.scene.start('Preload')
+  this.text = this.add.text(0,0, 'Menu')
   }
 
   
 }
 
 
-export default Preloader;
+export default Menu;

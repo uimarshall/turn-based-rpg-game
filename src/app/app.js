@@ -1,32 +1,32 @@
-const { Scenes } = require("phaser");
+const { config } = require("./config");
+
+ 
+
 
 const App = ()=>{
     this.IS_DEV = true
 }
 
 App.prototype.start = ()=>{
-    // Scenes
-    let scenes = []
+    
+// Create game app
+    let game = new Phaser.Game(config);
+
+    // Globals
+    game.IS_DEV = this.IS_DEV;
+    game.URL = '';
+    game.CONFIG = {
+        width:config.width,
+        height:config.height,
+        centerX: Math.round(0.5 * config.width),
+        centerY: Math.round(0.5 * config.height),
+        tile:16//size in px of each individual tile
+    };
+
+    // Sound
+//    game.sound_on:true
+
 
 }
 
 
-let doc;
-doc = document;
-doc = document.head;
-doc = document.body;
-doc = document.doctype;
-doc = document.domain;
-doc = document.documentURI;
-doc = document.URL;
-// doc = document.contentType;
-// doc = document.characterSet;
-// doc = document.links;
-// doc = document.links[0].classList;
-// doc = document.links[0].className;
-// doc = document.images;
-
-const para = document.createElement('p');
-para.textContent = `My url is ${doc}`;
-
-document.body.appendChild(para);
