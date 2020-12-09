@@ -1,3 +1,16 @@
+const { Scenes } = require("phaser");
+
+const App = ()=>{
+    this.IS_DEV = true
+}
+
+App.prototype.start = ()=>{
+    // Scenes
+    let scenes = []
+
+}
+
+
 let doc;
 doc = document;
 doc = document.head;

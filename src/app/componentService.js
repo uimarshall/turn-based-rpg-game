@@ -1,4 +1,4 @@
-import sayName from './alertService';
+
 
 const component = () => {
   const element = document.createElement('div');
