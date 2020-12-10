@@ -1,12 +1,11 @@
-import  config  from "./config";
+import Phaser from 'phaser';
 
- class Game extends Phaser.Game {
-  constructor () {
+import config from './config';
+
+class Game extends Phaser.Game {
+  constructor() {
     super(config);
-   
   }
 }
 
-export default Game
-
-
+export default Game;

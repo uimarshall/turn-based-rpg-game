@@ -5,18 +5,18 @@ import Menu from '../scenes/Menu';
 import Preloader from '../scenes/Preloader';
 
 // Scenes
-    let scenes = [BootScene, Preloader, Menu]
- 
+const scenes = [BootScene, Preloader, Menu];
+
 const config = {
   type: Phaser.AUTO,
   parent: 'phaser-app',
-  title:'Treasure of condor',
+  title: 'Treasure of condor',
   url: '',
   width: 800,
   height: 600,
   scene: scenes,
   pixelArt: true,
-  backgroundColor: 0x000000,
+  backgroundColor: 0xD6CDB0,
 };
 
-export default config
+export default config;
