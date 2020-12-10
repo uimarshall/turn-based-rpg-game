@@ -46,7 +46,15 @@ class Preloader extends Phaser.Scene {
 
 
   create() {
-    // this.scene.start('Menu');
+    // Load Menu
+    this.time.addEvent({
+      delay:2000,
+      callback:()=>{this.scene.start('Menu');},
+      callbackScope:this
+
+
+    })
+    
   }
 
   createLoader() {
@@ -59,7 +67,7 @@ class Preloader extends Phaser.Scene {
       0.5
       );
     // Progress text
-    this.txt_progress = new Title(
+    this.txtProgress = new Title(
       this,
       this.CONFIG.centerX,
       this.CONFIG.centerY-5,
@@ -68,6 +76,30 @@ class Preloader extends Phaser.Scene {
 
     );
     // Progress Bar
+    let x=10
+    let y=  this.CONFIG.centerY+5
+    this.border=this.add.graphics({x:x,y:y})
+    
+    this.progress=this.add.graphics({x:x,y:y})
+    // Callback
+    this.load.on('progress',this.onProgress,this)
+  }
+
+
+  onProgress(value){
+    // Width of progress bar
+    let w=  this.CONFIG.width-(2*this.progress.x)
+    let h=18
+    this.progress.clear()
+    this.progress.fillStyle('0xFFFFFF',1)
+    this.progress.fillRect(0,0,w*value,h)
+    this.border.clear()
+    this.border.lineStyle(2, 0x2E67E3,1)
+    this.border.strokeRect(0,0,w*value,h)
+    // Percentage in progress text
+    this.txtProgress.setText(Math.round(value*100)+ '%')
+
+
   }
 }
 
