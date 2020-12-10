@@ -1,10 +1,6 @@
 import './main.scss';
-import App from './app/app';
-import Menu from './scenes/Menu';
-import game from './app/app';
 import config  from './app/config';
-
-
+import Game from './app/app';
 
 const resizeAppScreen = ()=>{
     // Width-height-ratio of game resolution
@@ -39,29 +35,21 @@ const runApp =()=>{
     resizeAppScreen()
 }
 
-// window.onload = 
-// function (){
 
-//         try {
-//             eval('let i = 0')
-//             eval('const_dev = true')
-            
-//         } catch (error) {
-//             // alert('This browser is not supported Use chrome or firefox')
-//             return false
-            
-//         }
 
-//         // Launch the game
-//         runApp()
 
-// }
-
-class Game extends Phaser.Game {
-  constructor () {
-    super(config);
-   
-  }
-}
  
 window.game = new Game();
+// Globals
+    // game.IS_DEV = this.IS_DEV;
+    window.game.URL = '';
+    window.game.CONFIG = {
+        width:config.width,
+        height:config.height,
+        centerX: Math.round(0.5 * config.width),
+        centerY: Math.round(0.5 * config.height),
+        tile:16//size in px of each individual tile
+    };
+
+    // Sound
+   window.game.sound_on=true
