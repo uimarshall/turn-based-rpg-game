@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import game from '../app/app';
+
 // The Scene that will load all the assets of the game
 class Menu extends Phaser.Scene {
  
@@ -7,6 +9,7 @@ class Menu extends Phaser.Scene {
   }
 
  init(){
+     this.CONFIG = this.sys.game.CONFIG
 
  }
 
@@ -20,7 +23,9 @@ class Menu extends Phaser.Scene {
  
   create() {
     
-  this.text = this.add.text(0,0, 'Menu')
+  this.text = this.add.text(game.CONFIG.centerX,game.CONFIG.centerY, 'Menu')
+  this.text.setColor('#ffffff')
+  this.text.setOrigin(0.5)
   }
 
   

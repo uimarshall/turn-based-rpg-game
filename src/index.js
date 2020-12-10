@@ -1,5 +1,11 @@
 import './main.scss';
-import './app/app';
+import App from './app/app';
+import Menu from './scenes/Menu';
+import game from './app/app';
+import config  from './app/config';
+
+
+
 const resizeAppScreen = ()=>{
     // Width-height-ratio of game resolution
     let game_ratio = (360/2)/(640/2)
@@ -32,3 +38,30 @@ const runApp =()=>{
     window.addEventListener('resize',resizeAppScreen)
     resizeAppScreen()
 }
+
+// window.onload = 
+// function (){
+
+//         try {
+//             eval('let i = 0')
+//             eval('const_dev = true')
+            
+//         } catch (error) {
+//             // alert('This browser is not supported Use chrome or firefox')
+//             return false
+            
+//         }
+
+//         // Launch the game
+//         runApp()
+
+// }
+
+class Game extends Phaser.Game {
+  constructor () {
+    super(config);
+   
+  }
+}
+ 
+window.game = new Game();

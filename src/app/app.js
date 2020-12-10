@@ -1,19 +1,20 @@
-const { config } = require("./config");
+import  config  from "./config";
+
 
  
 
 
-const App = ()=>{
-    this.IS_DEV = true
-}
+// const App = ()=>{
+//     this.IS_DEV = true
+// }
 
-App.prototype.start = ()=>{
+// App.prototype.start = ()=>{
     
 // Create game app
     let game = new Phaser.Game(config);
 
     // Globals
-    game.IS_DEV = this.IS_DEV;
+    // game.IS_DEV = this.IS_DEV;
     game.URL = '';
     game.CONFIG = {
         width:config.width,
@@ -24,9 +25,11 @@ App.prototype.start = ()=>{
     };
 
     // Sound
-//    game.sound_on:true
+   game.sound_on=true
 
 
-}
+// }
+
+export default game
 
 
