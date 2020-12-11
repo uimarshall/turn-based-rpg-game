@@ -57,6 +57,10 @@ class Preloader extends Phaser.Scene {
 
 
   create() {
+    // Create sprite Animations
+    this.createAllAnims();
+
+
     // Load Menu
     this.time.addEvent({
       delay: 2000,
@@ -107,6 +111,37 @@ class Preloader extends Phaser.Scene {
     this.border.strokeRect(0, 0, w * value, h);
     // Percentage in progress text
     this.txtProgress.setText(`${Math.round(value * 100)}%`);
+  }
+
+  // Create anims
+  createAllAnims() {
+    // Hero walking
+
+    this.anims.create({
+      key: 'hero-walk', // create animation named hero-walk
+      frames: this.anims.generateFrameNames('hero', { frames: [0, 1, 0, 2] }),
+      frameRate: 12,
+      repeat: -1, // -1 is for infinite loop
+
+    });
+    // Spider walking
+
+    this.anims.create({
+      key: 'spider-walk', // create animation named hero-walk
+      frames: this.anims.generateFrameNames('spider', { frames: [0, 1, 0, 2] }),
+      frameRate: 12,
+      repeat: -1, // -1 is for infinite loop
+
+    });
+    // Octo walking
+
+    this.anims.create({
+      key: 'octo-walk', // create animation named hero-walk
+      frames: this.anims.generateFrameNames('octo', { frames: [0, 1, 0, 2] }),
+      frameRate: 12,
+      repeat: -1, // -1 is for infinite loop
+
+    });
   }
 }
 

@@ -14,6 +14,7 @@ class GameScene extends Phaser.Scene {
 
     this.DEPTH = {
       floor: 0,
+      player: 1,
     };
 
     this.generator = new Generator(this);
@@ -46,7 +47,7 @@ class GameScene extends Phaser.Scene {
     this.generator.setup();
 
     // Player
-    this.createPlayer()
+    this.createPlayer();
   }
 
   update() {
@@ -57,16 +58,21 @@ class GameScene extends Phaser.Scene {
 
     // Delete passed floor tiles
     this.generator.update();
+
+    // Move player downward
+    this.player.setSpritesPos(this.player.x, this.player.y + this.camSpeed.current);
   }
 
   // Player Sprite
-  createPlayer(){
+  createPlayer() {
     this.player = new Player(
       this,
       this.CONFIG.centerX,
       this.CONFIG.centerY,
-      'hero'
-    )
+      'hero',
+    );
+    this.player.setDepth(this.DEPTH.player);
+    this.player.startNewAnim('walk');
   }
 
   //   Camera

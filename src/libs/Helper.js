@@ -1,7 +1,7 @@
-class Helper{
-    constructor() {
-        
-    }
+class Helper {
+  constructor() {
+
+  }
 }
 
-export default Helper
+export default Helper;
