@@ -1,6 +1,8 @@
 
 import Phaser from 'phaser';
+import Entity from '../libs/Entity';
 import Generator from '../libs/Generator';
+import Player from '../libs/Player';
 
 class GameScene extends Phaser.Scene {
   constructor() {
@@ -43,7 +45,8 @@ class GameScene extends Phaser.Scene {
     // Craete floor
     this.generator.setup();
 
-    // Click to play text
+    // Player
+    this.createPlayer()
   }
 
   update() {
@@ -54,6 +57,16 @@ class GameScene extends Phaser.Scene {
 
     // Delete passed floor tiles
     this.generator.update();
+  }
+
+  // Player Sprite
+  createPlayer(){
+    this.player = new Player(
+      this,
+      this.CONFIG.centerX,
+      this.CONFIG.centerY,
+      'hero'
+    )
   }
 
   //   Camera
