@@ -24,6 +24,8 @@ class Title {
       case 'preload':
         style.fontSize = 24;
         break;
+        default:
+          break;
     }
 
     return style;

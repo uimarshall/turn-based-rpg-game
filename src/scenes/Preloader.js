@@ -97,13 +97,13 @@ class Preloader extends Phaser.Scene {
 
   onProgress(value) {
     // Width of progress bar
-    const w = this.CONFIG.width - (2 * this.progress.x);
-    const h = 18;
+    const w = this.CONFIG.width - 2 * this.progress.x;
+    const h = 36;
     this.progress.clear();
     this.progress.fillStyle('0xFFFFFF', 1);
     this.progress.fillRect(0, 0, w * value, h);
     this.border.clear();
-    this.border.lineStyle(2, 0x2E67E3, 1);
+    this.border.lineStyle(4, 0x2E67E3, 1);
     this.border.strokeRect(0, 0, w * value, h);
     // Percentage in progress text
     this.txtProgress.setText(`${Math.round(value * 100)}%`);
