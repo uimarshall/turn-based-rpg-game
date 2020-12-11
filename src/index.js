@@ -4,7 +4,7 @@ import Game from './app/app';
 
 const resizeAppScreen = () => {
   // Width-height-ratio of game resolution
-  const gameRatio = (360 / 2) / (640 / 2);
+  const gameRatio = (360) / (640);
 
   // Make div full height of browser and keep the ratio of game resolution
   const div = document.getElementById('phaser-app');
@@ -16,7 +16,7 @@ const resizeAppScreen = () => {
   const dpiW = (parseInt(div.style.width) / canvas.width);
   const dpiH = (parseInt(div.style.height) / canvas.height);
 
-  const height = window.innerHeight * (dpiW / dpiW);
+  const height = window.innerHeight * (dpiW / dpiH);
   const width = height * gameRatio;
 
   // Scale canvas
@@ -44,7 +44,7 @@ window.game.CONFIG = {
   height: config.height,
   centerX: Math.round(0.5 * config.width),
   centerY: Math.round(0.5 * config.height),
-  tile: 16, // size in px of each individual tile
+  tile: 32, // size in px of each individual tile
 };
 
 // Sound

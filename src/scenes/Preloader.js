@@ -14,6 +14,11 @@ class Preloader extends Phaser.Scene {
   }
 
   preload() {
+
+    // Load Background
+    this.bg=this.add.graphics({x:0,y:0})
+    this.bg.fillStyle('0xD6CDB0',1)
+    this.bg.fillRect(0,0,this.CONFIG.width,this.CONFIG.height)
     // Create loading bar
     this.createLoader();
     // Set path to where spritesheets are located

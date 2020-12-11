@@ -12,11 +12,11 @@ const config = {
   parent: 'phaser-app',
   title: 'Treasure of condor',
   url: '',
-  width: 800,
-  height: 600,
+  width: 360,
+  height: 640,
   scene: scenes,
   pixelArt: true,
-  backgroundColor: 0xD6CDB0,
+  backgroundColor: 0x333333,
 };
 
 export default config;
