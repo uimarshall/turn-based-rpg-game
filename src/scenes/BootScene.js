@@ -8,21 +8,16 @@ class BootScene extends Phaser.Scene {
   init() {
     this.URL = this.sys.game.URL;
     this.CONFIG = this.sys.game.CONFIG;
-
   }
 
   preload() {
-
     // Bitmap font for PreloadScene
 
     // Set path to where fonts are located
     this.load.setPath(`${this.URL}src/assets/fonts`);
 
     // Load bitmap
-    this.load.bitmapFont('ClickPixel', 'font.png','font.xml');
-
-
-
+    this.load.bitmapFont('ClickPixel', 'font.png', 'font.xml');
   }
 
 

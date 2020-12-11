@@ -22,62 +22,60 @@ class Menu extends Phaser.Scene {
     // this.text.setOrigin(0.5);
 
     // Background
-    this.createBackground()
+    this.createBackground();
     // Game title
-    this.title = new Title(this, 
+    this.title = new Title(this,
       this.CONFIG.centerX,
       75,
       'Battle Of Condor',
-      'title',
-  
-      );
-   
+      'title');
+
 
     // Click to play text
-     this.text = new Title(
+    this.text = new Title(
       this,
       this.CONFIG.centerX,
       this.CONFIG.centerY,
       'Play Game',
       'standard',
-     
+
 
     );
 
-    
+
     // Grab mouse input
-    this.onMouseInput()
+    this.onMouseInput();
     // Grab keyboard input
-    this.onKeyboardInput()
-
+    this.onKeyboardInput();
   }
 
-  createBackground(){
-    this.bg=this.add.graphics({x:0,y:0})
-    this.bg.fillStyle('0xD6CDB0',1)
-    this.bg.fillRect(0,0,this.CONFIG.width,this.CONFIG.height)
+  createBackground() {
+    this.bg = this.add.graphics({ x: 0, y: 0 });
+    this.bg.fillStyle('0xD6CDB0', 1);
+    this.bg.fillRect(0, 0, this.CONFIG.width, this.CONFIG.height);
   }
 
-  onMouseInput(){
-    this.input.on('pointerup',this.playGame,this)
+  onMouseInput() {
+    this.input.on('pointerup', this.playGame, this);
   }
-  onKeyboardInput(){
-    function handleKeyUp (e) { 
+
+  onKeyboardInput() {
+    function handleKeyUp(e) {
       switch (e.code) {
         case 'Enter':
-          this.playGame()
-          
+          this.playGame();
+
           break;
-      
+
         default:
           break;
       }
-     }
-    this.input.keyboard.on('keyup',handleKeyUp,this)
+    }
+    this.input.keyboard.on('keyup', handleKeyUp, this);
   }
 
-  playGame(){
-    this.scene.start('Game')
+  playGame() {
+    this.scene.start('Game');
   }
 }
 
