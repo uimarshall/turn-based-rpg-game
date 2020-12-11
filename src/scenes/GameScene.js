@@ -73,19 +73,10 @@ class GameScene extends Phaser.Scene {
     // Delete passed floor tiles
     this.generator.update();
 
-    // Move player downward
-    this.player.setSpritesPos(this.player.x, this.player.y + this.camSpeed.current);
+    // Update Player
+    this.player.update(this.isHolding.direction)
 
-    // Move player sideways
-    if (this.isHolding.direction==='left') {
-       this.player.setSpritesPos(this.player.x-1, this.player.y);
-
-      
-    }else if(this.isHolding.direction==='right'){
-       this.player.setSpritesPos(this.player.x+1, this.player.y);
-
-
-    }
+    
   }
 
   // Player Sprite
@@ -97,7 +88,8 @@ class GameScene extends Phaser.Scene {
       'hero',
     );
     this.player.setDepth(this.DEPTH.player);
-    this.player.startNewAnim('walk');
+    // this.player.startNewAnim('walk');
+    this.player.startMoving();
   }
 
   //   Camera
@@ -105,8 +97,17 @@ class GameScene extends Phaser.Scene {
     // Scroll Camera
     this.cameras.main.setScroll(
       0,
-      this.cameras.main.scrollY + this.camSpeed.current,
+      this.cameras.main.scrollY + this.camSpeed.current
     );
+    // keep up with the player if he has reached d center of d screen
+    let centerY=this.cameras.main.scrollY + 0.5*this.cameras.main.height
+    if (this.player.y>=centerY) {
+      this.cameras.main.setScroll(
+        0,
+        this.player.y - 0.5*this.cameras.main.height
+        )
+      
+    }
   }
 
   setCamSpeed(speed) {

@@ -164,6 +164,30 @@ class Entity {
       this.shadow.setDepth(depth);
     }
   }
+
+  setState(key){
+      if (!this.states.hasOwnProperty(key)) {
+
+          console.log(this.key + ' invalid STATE key: ' + key);
+          return
+      }
+
+      if (this.states.last===key) {
+          return
+          
+      }
+
+      this.resetStates()
+      this.states[key]=true
+      this.states.last=key
+  }
+
+  resetStates(){
+      for (let key in this.states) {
+          this.states[key]=false
+          
+      }
+  }
 }
 
 export default Entity;
