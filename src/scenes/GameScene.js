@@ -84,7 +84,8 @@ class GameScene extends Phaser.Scene {
     this.player = new Player(
       this,
       this.CONFIG.centerX,
-      this.CONFIG.centerY,
+      // this.CONFIG.centerY,
+      0.5*this.CONFIG.tile,
       'hero',
     );
     this.player.setDepth(this.DEPTH.player);

@@ -1,3 +1,6 @@
+import Helper from "./Helper";
+
+
 class Generator {
   constructor(ctx) {
     this.CONFIG = ctx.CONFIG;
@@ -6,6 +9,8 @@ class Generator {
 
     this.cols = 11;
     this.rows = 20;
+
+     this.helper = new Helper();
 
     this.layers = {
       floor: [],
@@ -19,10 +24,143 @@ class Generator {
 
   setup() {
     this.createFloor();
+    this.createRoomLayers()
   }
 
   update() {
     this.scrollFloor();
+  }
+
+  // Room Layers
+  createRoomLayers(){
+    // Add walls
+    // Generator
+    let walls = this.generateWalls()
+    // draw
+    walls=this.createWalls(walls)
+    // append to layer
+    this.layers.walls=this.layers.walls.concat(walls)
+  }
+
+  // Walls layer
+  generateWalls(){
+    let walls =[]
+    for (let ty = 0; ty < 1.5*this.rows; ty++) {
+      if (this.layers.walls.length+ty>=5 && (ty+1)%3===0) {
+        walls.push(this.generateWallRow())
+        
+      }else{
+        walls.push(this.generateEmptyRow(ty))
+      }
+      
+    }
+    return walls
+
+  }
+
+  generateEmptyRow(){
+    let row =[]
+    for (let tx = 0; tx < this.cols; tx++) {
+      row.push({
+        tx:tx,
+        isWall:false
+      })
+      
+    }
+    return row
+  }
+
+  generateWallRow(){
+    let gaps = []
+    for (let i = 0; i < this.helper.getRandInt(1,2); i++) {
+      gaps.push({idx:i,width:2})
+      
+    }
+    let min =1
+    let max = this.cols-gaps[0].width-1
+    let tx = this.helper.getRandInt(min,max)
+    gaps[0]=this.buildGap(tx,gaps[0].width)
+
+    if (gaps[1]) {
+      tx = this.helper.getRandInt(min,max)
+      while (gaps[0].taken.indexOf(tx)>=0) {
+        tx = this.helper.getRandInt(min,max)
+        
+      }
+      gaps[1]=this.buildGap(tx,gaps[1].width)
+
+      
+    }
+    return this.buildGap(gaps)
+
+  }
+
+  buildGap(tx,width){
+    let gap ={
+      tx:tx,
+      width:width
+    }
+    gap.empty=[]
+    for (let i = 0; i < width; i++) {
+      gap.empty.push(tx+i)
+      
+    }
+    gap.taken=[]
+    for (let i = -2; i < width+2; i++) {
+       gap.taken.push(tx+i);
+      
+    }
+    return gap
+  }
+
+  buildRow(gaps){
+    let row =[]
+
+    for (let tx = 0; tx < this.cols; tx++) {
+      row.push({
+        tx:tx,
+        frame:this.frames.walls,
+        isWall:true
+      })
+      
+    }
+
+    gaps.forEach((el)=>{
+      for (let tx = el.tx; tx < el.tx; tx++) {
+        if (row[tx]) {
+          row[tx].isWall=false
+          
+        }
+        
+      }
+    },this)
+    return row
+  }
+
+  createWalls(walls){
+    let x
+    let y
+    let spr
+
+    for (let ty = 0; ty < walls.length; ty++) {
+      for (let tx = 0; tx < walls[ty]; tx++) {
+        x=(tx*this.CONFIG.tile)+this.CONFIG.mapOffset
+        y=(ty+this.layers.walls.length)*this.CONFIG.tile
+
+        if (walls[ty][tx].isWall) {
+          spr=this.ctx.add.sprite(x,y,'tileset')
+          spr.setOrigin(0)
+          spr.setDepth(this.DEPTH.wall)
+          spr.setFrame(walls[ty][tx].frame)
+          walls[ty][tx].spr=spr
+          
+        }
+        
+      }
+      
+    }
+    return walls
+
   }
 
   // Floor Layer
