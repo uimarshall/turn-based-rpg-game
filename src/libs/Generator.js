@@ -20,6 +20,14 @@ class Generator {
       turrets: [],
       overlay: false,
     };
+
+    this.frames={
+      floor:0,
+      walls:1
+    }
+    this.tyOffset=0
+    this.pxOffset=0
+    this.height= -5
   }
 
   setup() {
@@ -28,6 +36,7 @@ class Generator {
   }
 
   update() {
+    this.checkRoom()
     this.scrollFloor();
   }
 
@@ -40,6 +49,42 @@ class Generator {
     walls=this.createWalls(walls)
     // append to layer
     this.layers.walls=this.layers.walls.concat(walls)
+    this.saveHeight()
+  }
+
+  // check new room
+  checkRoom(){
+    if (this.ctx.cameras.main.scrollY + this.ctx.cameras.main.height<this.height) {
+      return
+      
+    }
+    this.tyOffset=Math.floor(this.ctx.cameras.main.scrollY/this.CONFIG.tile)
+    this.pxOffset=this.ctx.cameras.main.scrollY
+
+    this.destroyPassedRows()
+    this.createRoomLayers()
+
+  }
+
+  destroyPassedRows(){
+    let rowNum= Math.floor(this.pxOffset/this.CONFIG.tile)
+    for (let ty = 0; ty < rowNum; ty++) {
+      for (let tx = 0; tx < this.cols; tx++) {
+        if (this.layers.walls[ty][tx].spr) {
+          this.layers.walls[ty][tx].spr.destroy()
+          
+        }
+        
+      }
+      
+    }
+
+  }
+
+  saveHeight(){
+    this.height=this.layers.walls.length*this.CONFIG.tile
+
+
   }
 
   // Walls layer
